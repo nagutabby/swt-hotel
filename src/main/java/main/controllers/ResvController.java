@@ -1,8 +1,8 @@
-package main.control;
+package main.controllers;
 
-import main.model.Reservation;
-import main.model.ResvModel;
-import main.view.*;
+import main.models.Reservation;
+import main.models.ResvModel;
+import main.views.*;
 
 public class ResvController {
     private static ResvController instance;

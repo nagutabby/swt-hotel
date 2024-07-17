@@ -79,7 +79,7 @@
           <artifactId>exec-maven-plugin</artifactId>
           <version>3.3.0</version>
           <configuration>
-            <mainClass>main.view.MainView</mainClass>
+            <mainClass>main.views.MainView</mainClass>
           </configuration>
         </plugin>
       </plugins>

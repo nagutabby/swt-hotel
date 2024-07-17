@@ -1,4 +1,4 @@
-package main.model;
+package main.models;
 
 // 予約記録
 public class Reservation {

@@ -1,4 +1,4 @@
-package main.view;
+package main.views;
 
 import java.util.List;
 import java.util.Arrays;
@@ -9,10 +9,10 @@ import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.*;
 
-import main.control.Util;
-import main.control.ResvController;
-import main.model.Reservation;
-import main.model.ResvModel;
+import main.controllers.ResvController;
+import main.controllers.Util;
+import main.models.Reservation;
+import main.models.ResvModel;
 
 public class ResvView {
     private static Display d;

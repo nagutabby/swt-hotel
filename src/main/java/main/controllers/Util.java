@@ -1,8 +1,8 @@
-package main.control;
+package main.controllers;
 
 import java.util.Arrays;
 
-import main.model.Reservation;
+import main.models.Reservation;
 
 // staticメソッドのみ
 public class Util {

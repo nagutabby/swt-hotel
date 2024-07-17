@@ -1,4 +1,4 @@
-package main.view;
+package main.views;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.ScrolledComposite;
@@ -6,10 +6,10 @@ import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.*;
 
-import main.control.ResvController;
-import main.control.Util;
-import main.model.Reservation;
-import main.model.ResvModel;
+import main.controllers.ResvController;
+import main.controllers.Util;
+import main.models.Reservation;
+import main.models.ResvModel;
 
 public class RoomView {
     private static Display d;

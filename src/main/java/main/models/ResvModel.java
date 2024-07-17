@@ -1,9 +1,9 @@
-package main.model;
+package main.models;
 
 import java.util.List;
 
-import main.control.ResvController;
-import main.control.Util;
+import main.controllers.ResvController;
+import main.controllers.Util;
 
 import java.util.ArrayList;
 

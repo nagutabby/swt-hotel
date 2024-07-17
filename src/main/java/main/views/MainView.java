@@ -1,4 +1,4 @@
-package main.view;
+package main.views;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Font;
@@ -9,8 +9,8 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 
-import main.control.ResvController;
-import main.model.ResvModel;
+import main.controllers.ResvController;
+import main.models.ResvModel;
 
 public class MainView {
     private static final Display d = new Display();
