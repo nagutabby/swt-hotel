@@ -6,8 +6,8 @@ import main.models.Reservation;
 
 // staticメソッドのみ
 public class Util {
-    public static  int toInt(String s) {
-        int v=0;
+    public static int toInt(String s) {
+        int v = 0;
         try {
             v = Integer.parseInt(s);
         } catch (NumberFormatException e) {
@@ -17,11 +17,12 @@ public class Util {
     }
 
     // 範囲検査:l,uは正, 数字以外はvは-1なので失敗
-    public static  boolean inRange(int v, int l, int u) {
-        return  l <= v  && v <= u;
+    public static boolean inRange(int v, int l, int u) {
+        return l <= v && v <= u;
     }
 
     private static String[] sv = new String[5];
+
     public static String[] generate(int id, Reservation r) {
         Arrays.fill(sv, "");
         sv[0] = String.format("%d", id);

@@ -7,9 +7,11 @@ import org.eclipse.swt.widgets.*;
 
 public class Factory {
     private static Display d;
-    private static final Font f = new Font(d,"ＭＳ ゴシック",18,SWT.NORMAL);
+    private static final Font f = new Font(d, "ＭＳ ゴシック", 18, SWT.NORMAL);
 
-    public static void init(Display di) { d = di; }
+    public static void init(Display di) {
+        d = di;
+    }
 
     public static Label makeLabel(Shell s, String name) {
         GridData gd = new GridData();
@@ -35,7 +37,7 @@ public class Factory {
     }
 
     public static Button makeButton(Shell s, String name) {
-        Button b = new Button(s,SWT.NULL);
+        Button b = new Button(s, SWT.NULL);
         GridData gd = new GridData();
         gd.horizontalAlignment = SWT.CENTER;
         gd.widthHint = 240;
