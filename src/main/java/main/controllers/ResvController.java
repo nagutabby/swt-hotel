@@ -56,18 +56,18 @@ public class ResvController {
                 ckin < ckout);
     }
 
-    private boolean overlapped(int ckin1, int ckout1, int ckin2, int ckout2) {
-        if (ckin1 > ckin2) {
-            int t;
-            t = ckin2;
-            ckin2 = ckin1;
-            ckin1 = t;
-            t = ckout2;
-            ckout2 = ckout1;
-            ckout1 = t;
-        }
-        return (ckin2 < ckout1);
-    }
+//    private boolean overlapped(int ckin1, int ckout1, int ckin2, int ckout2) {
+//        if (ckin1 > ckin2) {
+//            int t;
+//            t = ckin2;
+//            ckin2 = ckin1;
+//            ckin1 = t;
+//            t = ckout2;
+//            ckout2 = ckout1;
+//            ckout1 = t;
+//        }
+//        return (ckin2 < ckout1);
+//    }
 
     // 重複検査
     public void add(Reservation r) {

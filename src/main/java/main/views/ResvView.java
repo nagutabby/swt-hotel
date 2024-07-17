@@ -69,7 +69,7 @@ public class ResvView {
     }
 
     public ResvView(Display d) {
-        this.d = d;
+        ResvView.d = d;
         init();
 
         shell.setSize(800, 600);

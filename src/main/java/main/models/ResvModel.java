@@ -51,20 +51,20 @@ public class ResvModel {
         return (ckin2 < ckout1);
     }
 
-    private Reservation duplicated(Reservation r1) {
-        int ckin1 = Util.toInt(r1.ckin);
-        int ckout1 = Util.toInt(r1.ckout);
-        for (var r2 : resvs) {
-            if (r1.owner.equals(r2.owner)) {
-                int ckin2 = Util.toInt(r2.ckin);
-                int ckout2 = Util.toInt(r2.ckout);
-                if (overlapped(ckin1, ckout1, ckin2, ckout2)) {
-                    return r2;
-                }
-            }
-        }
-        return null;
-    }
+//    private Reservation duplicated(Reservation r1) {
+//        int ckin1 = Util.toInt(r1.ckin);
+//        int ckout1 = Util.toInt(r1.ckout);
+//        for (var r2 : resvs) {
+//            if (r1.owner.equals(r2.owner)) {
+//                int ckin2 = Util.toInt(r2.ckin);
+//                int ckout2 = Util.toInt(r2.ckout);
+//                if (overlapped(ckin1, ckout1, ckin2, ckout2)) {
+//                    return r2;
+//                }
+//            }
+//        }
+//        return null;
+//    }
 
     public Reservation checkDuplicate(String o, String ci, String co) {
         int ckin1 = Util.toInt(ci);

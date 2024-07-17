@@ -5,7 +5,6 @@ import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 
 import main.controllers.ResvController;
@@ -23,14 +22,14 @@ public class MainView {
         rc.setResvView(new ResvView(d)); // rc.attach
         rc.setRoomView(new RoomView(d)); // rc.attach
         rc.setMessageView(new MessageView(d));
-
         Factory.init(d);
+        shell.setFont(f);
 
         shell.setText("ホテル予約システム");
         GridLayout l = new GridLayout(1, true);
         shell.setLayout(l);
 
-        final Label l1 = Factory.makeLabel(shell, "ようこそ");
+        Factory.makeLabel(shell, "ようこそ");
 
         final Button b1 = Factory.makeButton(shell, "予約");
         b1.addListener(SWT.Selection, e -> rc.getResvView().showAddDialog());

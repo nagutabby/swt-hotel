@@ -20,7 +20,7 @@ public class MessageView {
     }
 
     public MessageView(Display d) {
-        this.d = d;
+        MessageView.d = d;
         init();
 
         shell.setSize(400, 300);

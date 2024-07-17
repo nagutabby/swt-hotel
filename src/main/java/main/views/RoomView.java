@@ -6,7 +6,7 @@ import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.*;
 
-import main.controllers.ResvController;
+// import main.controllers.ResvController;
 import main.controllers.Util;
 import main.models.Reservation;
 import main.models.ResvModel;
@@ -21,7 +21,7 @@ public class RoomView {
     private static final int D = 11; // 開始日
 
     private static ResvModel rm = ResvModel.getInstance();
-    private static ResvController rc = ResvController.getInstance();
+//    private static ResvController rc = ResvController.getInstance();
 
     public void init() {
         shell = new Shell(d, SWT.TITLE | SWT.RESIZE);
@@ -102,7 +102,7 @@ public class RoomView {
     }
 
     public RoomView(Display d) {
-        this.d = d;
+        RoomView.d = d;
         init();
         shell.setSize(1320, 800);
         shell.setVisible(false);
