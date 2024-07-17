@@ -10,7 +10,7 @@ Install Maven packages and compile Java programs
 mvn compile
 ```
 
-Execute `main.view.MainView`
+Execute `main.views.MainView`
 ```bash
 mvn exec:java
 ```
