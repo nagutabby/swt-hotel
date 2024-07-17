@@ -1,11 +1,9 @@
 package main.models;
 
 import java.util.List;
-
-import main.controllers.ResvController;
-import main.controllers.Util;
-
 import java.util.ArrayList;
+
+import main.controllers.Util;
 
 public class ResvModel {
     private static ResvModel instance;

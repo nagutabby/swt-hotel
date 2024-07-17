@@ -1,7 +1,6 @@
 package main.views;
 
 import java.util.List;
-import java.util.Arrays;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.ScrolledComposite;
