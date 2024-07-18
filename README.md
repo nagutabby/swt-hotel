@@ -1,4 +1,4 @@
-# swt-hotel-base
+# swt-hotel
 ## Prerequisites
 - Java 17
 - Maven
