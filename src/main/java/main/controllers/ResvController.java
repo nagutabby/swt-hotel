@@ -63,7 +63,6 @@ public class ResvController {
         if (!isValid(inputReservation)) {
             messageView.append("入力された値が不適切です");
         } else if (!reservation.isVacant(inputReservation)) {
-            // TODO: show error message in messageView
             getMessageView().display("部屋が満室です");
         } else if (reservation.isDuplicated(inputReservation.name, inputReservation.startDate, inputReservation.endDate)) {
             messageView.append("予約が重複しています");
