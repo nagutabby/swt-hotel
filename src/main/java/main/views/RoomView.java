@@ -71,11 +71,11 @@ public class RoomView {
 
         int c = 0;
         for (Reservation r : rm.getAll()) {
-            int ckin = Util.toInt(r.ckin) - D;
-            int ckout = Util.toInt(r.ckout) - D;
+            int ckin = Util.toInt(r.startDate) - D;
+            int ckout = Util.toInt(r.endDate) - D;
             for (int i = ckin; i < ckout; i++) {
                 if (Util.inRange(i, 0, N - 1)) {
-                    buf[c][i] = r.owner;
+                    buf[c][i] = r.name;
                 }
             }
             if (++c >= 10) {

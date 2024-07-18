@@ -26,10 +26,10 @@ public class Util {
     public static String[] generate(int id, Reservation r) {
         Arrays.fill(sv, "");
         sv[0] = String.format("%d", id);
-        sv[1] = r.owner;
-        sv[2] = r.ckin;
-        sv[3] = r.ckout;
-        sv[4] = r.num;
+        sv[1] = r.name;
+        sv[2] = r.startDate;
+        sv[3] = r.endDate;
+        sv[4] = r.numberRooms;
         return sv;
     }
 }

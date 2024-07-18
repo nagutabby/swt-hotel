@@ -77,14 +77,19 @@ public class ResvView {
     }
 
     private void makeAddResvDialog(Shell s) {
-        Text tf1 = Factory.makeTextField(s, "owner", SWT.NULL);
-        Text tf2 = Factory.makeTextField(s, "ckin", SWT.NULL);
-        Text tf3 = Factory.makeTextField(s, "ckout", SWT.NULL);
-        Text tf4 = Factory.makeTextField(s, "num", SWT.NULL);
+        Text nameField = Factory.makeTextField(s, "氏名", SWT.NULL);
+        Text startDateField = Factory.makeTextField(s, "利用開始日", SWT.NULL);
+        Text endDateField = Factory.makeTextField(s, "利用終了日", SWT.NULL);
+        Text numberRoomsField = Factory.makeTextField(s, "部屋数", SWT.NULL);
 
         Button b1 = Factory.makeButton(s, "送信");
         b1.addListener(SWT.Selection, e -> {
-            Reservation r = new Reservation(tf1.getText(), tf2.getText(), tf3.getText(), tf4.getText());
+            String name = nameField.getText();
+            String startDate = startDateField.getText();
+            String endDate = endDateField.getText();
+            String numberRooms = numberRoomsField.getText();
+
+            Reservation r = new Reservation(name, startDate, endDate, numberRooms);
             rc.add(r);
             rc.update();
             s.dispose();
@@ -96,11 +101,11 @@ public class ResvView {
 
     private void makeRemoveResvDialog(Shell s) {
         Text tf0 = Factory.makeTextField(s, "id", SWT.NULL);
-        Text tf1 = Factory.makeTextField(s, "owner", SWT.NULL);
+        Text tf1 = Factory.makeTextField(s, "name", SWT.NULL);
         Button b1 = Factory.makeButton(s, "送信");
         b1.addListener(SWT.Selection, e -> {
             Reservation r = new Reservation(tf0.getText(), tf1.getText(), "", "");
-            System.out.println("remove:r=" + r);
+            System.out.println("remove: r = " + r);
             rc.remove(r);
             rc.update();
             s.dispose();
