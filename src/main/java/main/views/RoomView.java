@@ -1,12 +1,13 @@
 package main.views;
 
+import java.util.Arrays;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.*;
 
-// import main.controllers.ResvController;
 import main.controllers.Util;
 import main.models.Reservation;
 import main.models.ResvModel;
@@ -17,11 +18,10 @@ public class RoomView {
     private static Shell shell;
     private static ScrolledComposite sc;
     private static Table tbl;
-    private static final int N = 10; // 日数
-    private static final int D = 11; // 開始日
+    private static final int N = 31; // 日数
+    private static final int D = 1; // 開始日
 
     private static ResvModel rm = ResvModel.getInstance();
-//    private static ResvController rc = ResvController.getInstance();
 
     public void init() {
         shell = new Shell(d, SWT.TITLE | SWT.RESIZE);
@@ -58,7 +58,6 @@ public class RoomView {
         return v + "";
     }
 
-    // TODO:可変長に変更
     private static String[][] buf = new String[10][N];
 
     private void makeBuffer() {
@@ -71,9 +70,9 @@ public class RoomView {
 
         int c = 0;
         for (Reservation r : rm.getAll()) {
-            int ckin = Util.toInt(r.startDate) - D;
-            int ckout = Util.toInt(r.endDate) - D;
-            for (int i = ckin; i < ckout; i++) {
+            int startDate = Util.toInt(r.startDate) - D;
+            int endDate = Util.toInt(r.endDate) - D;
+            for (int i = startDate; i < endDate; i++) {
                 if (Util.inRange(i, 0, N - 1)) {
                     buf[c][i] = r.name;
                 }
@@ -86,8 +85,10 @@ public class RoomView {
 
     // 1行分の表示内容
     private String[] makeRow(int y) {
-        String[] sv = { toStr(101 + y), "", "", "", "", "", "", "", "", "", "" };
-        for (int x = 0; x < 10; x++)
+        String[] sv = new String[N + 1];
+        Arrays.fill(sv, "");
+        sv[0] = toStr(101 + y);
+        for (int x = 0; x < N - 1; x++)
             sv[x + 1] = buf[y][x];
         return sv;
     }

@@ -29,7 +29,7 @@ public class ResvView {
         shell.setLayout(new GridLayout(1, true));
         shell.setText("予約記録一覧");
         sc = new ScrolledComposite(shell, SWT.H_SCROLL | SWT.V_SCROLL);
-        tbl = new Table(sc, SWT.LEFT); // 表示用
+        tbl = new Table(sc, SWT.LEFT);
         sc.setContent(tbl);
 
         inittbl();

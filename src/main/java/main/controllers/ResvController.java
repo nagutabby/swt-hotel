@@ -48,24 +48,23 @@ public class ResvController {
     }
 
     // 日付検査のみ
-    private boolean isValid(Reservation r) {
-        int ckin = Util.toInt(r.startDate);
-        int ckout = Util.toInt(r.endDate);
-        return (Util.inRange(ckin, 1, 20) &&
-                Util.inRange(ckout - 1, 1, 20) &&
-                ckin < ckout);
+    private boolean isDateValid(Reservation r) {
+        int startDate = Util.toInt(r.startDate);
+        int endDate = Util.toInt(r.endDate);
+        return (Util.inRange(startDate, 1, 30) &&
+                Util.inRange(endDate, 1, 31) &&
+                startDate < endDate);
     }
 
-    // 重複検査
     public void add(Reservation inputReservation) {
         int numberRooms = Util.toInt(inputReservation.numberRooms);
 
-        if (!isValid(inputReservation)) {
-            messageView.append("入力された値が不適切です");
+        if (!isDateValid(inputReservation)) {
+            getMessageView().display("利用開始日や利用終了日に誤りがあります");
         } else if (!reservation.isVacant(inputReservation)) {
             getMessageView().display("部屋が満室です");
         } else if (reservation.isDuplicated(inputReservation.name, inputReservation.startDate, inputReservation.endDate)) {
-            messageView.append("予約が重複しています");
+            getMessageView().display("予約が重複しています");
         } else {
             for (int i = 0; i < numberRooms; i++) {
                 reservation.add(inputReservation);
@@ -73,12 +72,10 @@ public class ResvController {
         }
     }
 
-    public void remove(Reservation r) {
-        // TODO: 検査
-        // model.remove(r);
+    public void remove(Reservation inputReservation) {
+        reservation.remove(inputReservation);
     }
 
-    // TODO: リストの走査
     public void update() {
         resvView.update();
         roomView.update();
