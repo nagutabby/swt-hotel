@@ -39,12 +39,12 @@ public class ResvModel {
     private boolean isOverlapped(int inputStartDate, int inputEndDate, int reservedStartDate, int reservedEndDate) {
         // ユーザーが入力した利用開始日が、特定の予約の利用開始日よりも前である
         if (inputStartDate < reservedStartDate) {
-            // ユーザーが入力した利用終了日が特定の予約の利用開始日よりも前である
-            if (inputEndDate < reservedStartDate) {
+            // ユーザーが入力した利用終了日が特定の予約の利用開始日と同じかそれよりも前である
+            if (inputEndDate <= reservedStartDate) {
                 return false;
             }
-        // ユーザーが入力した利用開始日が特定の予約の利用終了日よりも後である
-        } else if (reservedEndDate < inputStartDate) {
+            // ユーザーが入力した利用開始日が特定の予約の利用終了日と同じかそれよりも後である
+        } else if (reservedEndDate <= inputStartDate) {
             return false;
         }
         return true;
@@ -55,7 +55,7 @@ public class ResvModel {
         int inputEndDate = Util.toInt(inputEndDateString);
         boolean isDuplicated = false;
 
-        for (Reservation reservation: reservations) {
+        for (Reservation reservation : reservations) {
             if (reservation.name.equals(inputOwner)) {
                 int reservedStartDate = Util.toInt(reservation.startDate);
                 int reservedEndDate = Util.toInt(reservation.endDate);
@@ -70,7 +70,7 @@ public class ResvModel {
 
     public boolean isVacant(Reservation inputReservation) {
         int count = 0;
-        for (Reservation reservation: reservations) {
+        for (Reservation reservation : reservations) {
             count += Util.toInt(reservation.numberRooms);
         }
         return count + Util.toInt(inputReservation.numberRooms) <= 10;
