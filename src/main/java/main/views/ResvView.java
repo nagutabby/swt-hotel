@@ -38,7 +38,7 @@ public class ResvView {
         b1.addListener(SWT.Selection, e -> shell.setVisible(false));
     }
 
-    private static final String[] colname = { "owner", "ckin", "ckout", "num" };
+    private static final String[] colname = { "氏名", "利用開始日", "利用終了日", "部屋数" };
 
     private void inittbl() {
         TableColumn col;
@@ -61,7 +61,7 @@ public class ResvView {
         if (l.size() > 0) {
             tbl.removeAll();
             int id = 0;
-            for (Reservation r : l) {
+            for (Reservation r: l) {
                 TableItem row = new TableItem(tbl, SWT.NULL);
                 row.setText(Util.generate(++id, r));
             }

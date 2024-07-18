@@ -42,9 +42,6 @@ public class MainView {
 
         final Button b4 = Factory.makeButton(shell, "部屋一覧表示");
         b4.addListener(SWT.Selection, e -> rc.getRoomView().display());
-
-        final Button b5 = Factory.makeButton(shell, "メッセージ");
-        b5.addListener(SWT.Selection, e -> rc.getMessageView().display());
     }
 
     public static void main(String[] args) {

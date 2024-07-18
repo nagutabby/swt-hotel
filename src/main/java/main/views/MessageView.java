@@ -3,16 +3,15 @@ package main.views;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.swt.widgets.MessageBox;
 
 public class MessageView {
     private static Display d;
     private static Shell shell;
     private static final Font f = new Font(d, "ＭＳ ゴシック", 18, SWT.NORMAL);
-    // private static ScrolledComposite sc;
     private static Text tf;
 
     public Text getTextField() {
@@ -31,19 +30,17 @@ public class MessageView {
         shell = new Shell(d, SWT.TITLE | SWT.RESIZE);
         shell.setFont(f);
         shell.setLayout(new GridLayout(1, true));
-        shell.setText("メッセージ");
-
-        tf = Factory.makeTextField(shell, "", SWT.MULTI | SWT.BORDER | SWT.WRAP | SWT.V_SCROLL);
-        final Button b1 = Factory.makeButton(shell, "OK");
-        b1.addListener(SWT.Selection, e -> shell.setVisible(false));
     }
 
     public void append(String s) {
-        tf.setText(tf.getText() + s + "\n");
     }
 
-    public void display() {
-        shell.setVisible(true);
+    public void display(String message) {
+        MessageBox messageBox = new MessageBox(shell, SWT.ICON_WARNING | SWT.OK);
+
+        messageBox.setText("エラー");
+        messageBox.setMessage(message);
+        messageBox.open();
     }
 
     public void close() {

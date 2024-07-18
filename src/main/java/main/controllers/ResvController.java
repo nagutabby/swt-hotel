@@ -61,12 +61,12 @@ public class ResvController {
         int numberRooms = Util.toInt(inputReservation.numberRooms);
 
         if (!isValid(inputReservation)) {
-            messageView.append(inputReservation + " is invalid");
+            messageView.append("入力された値が不適切です");
         } else if (!reservation.isVacant(inputReservation)) {
-            System.err.println("no vacancy for " + reservation);
             // TODO: show error message in messageView
+            getMessageView().display("部屋が満室です");
         } else if (reservation.isDuplicated(inputReservation.name, inputReservation.startDate, inputReservation.endDate)) {
-            messageView.append("reservation is duplicated");
+            messageView.append("予約が重複しています");
         } else {
             for (int i = 0; i < numberRooms; i++) {
                 reservation.add(inputReservation);
