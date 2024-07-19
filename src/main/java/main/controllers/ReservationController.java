@@ -61,8 +61,6 @@ public class ReservationController {
     }
 
     public void add(Reservation inputReservation) {
-        int numberRooms = Util.toInt(inputReservation.numberRooms);
-
         if (!isDateValid(inputReservation)) {
             getMessageView().display("利用開始日や利用終了日に誤りがあります");
         } else if (!reservationModel.isVacant(inputReservation)) {
@@ -71,9 +69,7 @@ public class ReservationController {
                 inputReservation.endDate)) {
             getMessageView().display("予約が重複しています");
         } else {
-            for (int i = 0; i < numberRooms; i++) {
-                reservationModel.add(inputReservation);
-            }
+            reservationModel.add(inputReservation);
         }
     }
 

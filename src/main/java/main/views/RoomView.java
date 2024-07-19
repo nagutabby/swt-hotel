@@ -67,16 +67,21 @@ public class RoomView {
             }
         }
 
-        int c = 0;
+        int count = 0;
         for (Reservation reservation : reservationModel.getAll()) {
             int startDate = Util.toInt(reservation.startDate) - D;
             int endDate = Util.toInt(reservation.endDate) - D;
-            for (int i = startDate; i < endDate; i++) {
-                if (Util.inRange(i, 0, N - 1)) {
-                    buf[c][i] = reservation.name;
+            int numberRooms = Util.toInt(reservation.numberRooms);
+
+            for (int i = 0; i < numberRooms; i++) {
+                for (int j = startDate; j < endDate; j++) {
+                    if (Util.inRange(j, 0, N - 1)) {
+                        buf[count][j] = reservation.name;
+                    }
                 }
+                count++;
             }
-            if (++c >= 10) {
+            if (count >= 10) {
                 break;
             }
         }
