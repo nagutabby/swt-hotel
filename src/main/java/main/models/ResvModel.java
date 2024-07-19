@@ -17,19 +17,18 @@ public class ResvModel {
         return instance;
     }
 
-    private List<Reservation> reservations = new ArrayList<Reservation>(); // 予約記録
-    // TODO:部屋状態情報追加
+    private List<Reservation> reservations = new ArrayList<Reservation>();
 
     // 動作確認用初期値(要素数増加)
     public void init() {
-        reservations.add(new Reservation("Alice", "11", "13"));
-        reservations.add(new Reservation("Betty", "12", "14"));
-        reservations.add(new Reservation("Carol", "13", "15"));
-        reservations.add(new Reservation("Diana", "14", "16"));
-        reservations.add(new Reservation("Emily", "15", "17"));
-        reservations.add(new Reservation("Flora", "16", "18"));
-        reservations.add(new Reservation("Helen", "17", "19"));
-        reservations.add(new Reservation("Iris", "18", "20"));
+        reservations.add(new Reservation("1", "Alice", "11", "13", "1"));
+        reservations.add(new Reservation("2", "Betty", "12", "14", "1"));
+        reservations.add(new Reservation("3", "Carol", "13", "15", "1"));
+        reservations.add(new Reservation("4", "Diana", "14", "16", "1"));
+        reservations.add(new Reservation("5", "Emily", "15", "17", "1"));
+        reservations.add(new Reservation("6", "Flora", "16", "18", "1"));
+        reservations.add(new Reservation("7", "Helen", "17", "19", "1"));
+        reservations.add(new Reservation("8", "Alice", "18", "20", "1"));
     }
 
     public List<Reservation> getAll() {
@@ -90,6 +89,6 @@ public class ResvModel {
     }
 
     public void remove(Reservation reservation) {
-        reservations.remove(reservation);
+        reservations.remove(reservations.indexOf(reservation));
     }
 }

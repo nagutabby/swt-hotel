@@ -23,9 +23,9 @@ public class Util {
 
     private static String[] sv = new String[5];
 
-    public static String[] generate(int id, Reservation r) {
+    public static String[] generate(Reservation r) {
         Arrays.fill(sv, "");
-        sv[0] = String.format("%d", id);
+        sv[0] = r.id;
         sv[1] = r.name;
         sv[2] = r.startDate;
         sv[3] = r.endDate;

@@ -1,9 +1,11 @@
 package main.views;
 
 import java.util.List;
+import java.util.ArrayList;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.ScrolledComposite;
+import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.*;
@@ -20,8 +22,8 @@ public class ResvView {
     private static Table tbl;
     private static final Font f = new Font(d, "ＭＳ ゴシック", 18, SWT.NORMAL);
 
-    private static ResvModel rm = ResvModel.getInstance();
-    private static ResvController rc = ResvController.getInstance();
+    private static ResvModel resvModel = ResvModel.getInstance();
+    private static ResvController resvController = ResvController.getInstance();
 
     public void init() {
         shell = new Shell(d, SWT.TITLE | SWT.RESIZE);
@@ -57,13 +59,12 @@ public class ResvView {
     }
 
     public void update() {
-        List<Reservation> l = rm.getAll();
-        if (l.size() > 0) {
+        List<Reservation> reservations = resvModel.getAll();
+        if (reservations.size() > 0) {
             tbl.removeAll();
-            int id = 0;
-            for (Reservation r: l) {
+            for (Reservation reservation: reservations) {
                 TableItem row = new TableItem(tbl, SWT.NULL);
-                row.setText(Util.generate(++id, r));
+                row.setText(Util.generate(reservation));
             }
         }
     }
@@ -89,9 +90,9 @@ public class ResvView {
             String endDate = endDateField.getText();
             String numberRooms = numberRoomsField.getText();
 
-            Reservation r = new Reservation(name, startDate, endDate, numberRooms);
-            rc.add(r);
-            rc.update();
+            Reservation reservation = new Reservation(name, startDate, endDate, numberRooms);
+            resvController.add(reservation);
+            resvController.update();
             s.dispose();
         });
 
@@ -100,15 +101,43 @@ public class ResvView {
     }
 
     private void makeRemoveResvDialog(Shell s) {
-        Text tf0 = Factory.makeTextField(s, "id", SWT.NULL);
-        Text tf1 = Factory.makeTextField(s, "name", SWT.NULL);
+        Text tf1 = Factory.makeTextField(s, "氏名", SWT.NULL);
         Button b1 = Factory.makeButton(s, "送信");
         b1.addListener(SWT.Selection, e -> {
-            Reservation r = new Reservation(tf0.getText(), tf1.getText(), "", "");
-            System.out.println("remove: r = " + r);
-            rc.remove(r);
-            rc.update();
-            s.dispose();
+            String name = tf1.getText();
+            if (!resvModel.exists(name)) {
+                resvController.getMessageView().display(name + "さんの予約がありません");
+            } else {
+                ArrayList<Reservation> reservations = resvController.getReservations(name);
+                final Shell subshell = new Shell(d, SWT.TITLE | SWT.CLOSE);
+                subshell.setLayout(new GridLayout(2, true));
+                subshell.setText("解約");
+                subshell.setSize(600, 600);
+                final Font f = new Font(d, "ＭＳ ゴシック", 18, SWT.NORMAL);
+                reservations.forEach(reservation -> {
+                    StyledText reservationText = new StyledText(subshell, SWT.SINGLE);
+                    reservationText.setCaret(null);
+                    reservationText.setFont(f);
+                    String text = reservation.name + ", " + reservation.startDate + ", " + reservation.endDate + ", " + reservation.numberRooms;
+                    reservationText.setText(text);
+                    final Button removeButton = Factory.makeButton(subshell, "削除");
+                    removeButton.setData("reservation", reservation);
+                    removeButton.addListener(SWT.Selection, removeEvent -> {
+                        resvModel.remove((Reservation)removeButton.getData("reservation"));
+                        resvController.update();
+                        reservationText.dispose();
+                        removeButton.dispose();
+                    });
+                });
+
+                subshell.open();
+                while (!subshell.isDisposed()) {
+                    if (!d.readAndDispatch()) {
+                        d.sleep();
+                    }
+                }
+            }
+
         });
 
         Button b2 = Factory.makeButton(s, "戻る");

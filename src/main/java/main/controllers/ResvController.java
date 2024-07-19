@@ -1,5 +1,8 @@
 package main.controllers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import main.models.Reservation;
 import main.models.ResvModel;
 import main.views.*;
@@ -17,7 +20,7 @@ public class ResvController {
         return instance;
     }
 
-    private ResvModel reservation = ResvModel.getInstance();
+    private ResvModel resvModel = ResvModel.getInstance();
 
     private ResvView resvView;
     private RoomView roomView;
@@ -47,7 +50,6 @@ public class ResvController {
         messageView = v;
     }
 
-    // 日付検査のみ
     private boolean isDateValid(Reservation r) {
         int startDate = Util.toInt(r.startDate);
         int endDate = Util.toInt(r.endDate);
@@ -61,19 +63,32 @@ public class ResvController {
 
         if (!isDateValid(inputReservation)) {
             getMessageView().display("利用開始日や利用終了日に誤りがあります");
-        } else if (!reservation.isVacant(inputReservation)) {
+        } else if (!resvModel.isVacant(inputReservation)) {
             getMessageView().display("部屋が満室です");
-        } else if (reservation.isDuplicated(inputReservation.name, inputReservation.startDate, inputReservation.endDate)) {
+        } else if (resvModel.isDuplicated(inputReservation.name, inputReservation.startDate, inputReservation.endDate)) {
             getMessageView().display("予約が重複しています");
         } else {
             for (int i = 0; i < numberRooms; i++) {
-                reservation.add(inputReservation);
+                resvModel.add(inputReservation);
             }
         }
     }
 
     public void remove(Reservation inputReservation) {
-        reservation.remove(inputReservation);
+        resvModel.remove(inputReservation);
+    }
+
+    public ArrayList<Reservation> getReservations(String name) {
+        List<Reservation> reservations = new ArrayList<>();
+        reservations = resvModel.getAll();
+        ArrayList<Reservation> userReservations = new ArrayList<>();
+
+        for (Reservation reservation : reservations) {
+            if (reservation.name.equals(name)) {
+                userReservations.add(reservation);
+            }
+        }
+        return userReservations;
     }
 
     public void update() {
