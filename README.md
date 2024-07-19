@@ -1,5 +1,6 @@
 # swt-hotel
 ## Prerequisites
+- Windows 11
 - Java 17
 - Maven
 
