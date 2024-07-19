@@ -67,21 +67,17 @@ public class ReservationModel {
         return isDuplicated;
     }
 
+    public boolean isNumberRoomsValid(Reservation reservation) {
+        int numberRooms = Util.toInt(reservation.numberRooms);
+        return numberRooms > 0;
+    }
+
     public boolean isVacant(Reservation inputReservation) {
         int count = 0;
         for (Reservation reservation : reservations) {
             count += Util.toInt(reservation.numberRooms);
         }
         return count + Util.toInt(inputReservation.numberRooms) <= 10;
-    }
-
-    public boolean exists(String name) {
-        for (Reservation reservation : reservations) {
-            if (reservation.name.equals(name)) {
-                return true;
-            }
-        }
-        return false;
     }
 
     public void add(Reservation reservation) {

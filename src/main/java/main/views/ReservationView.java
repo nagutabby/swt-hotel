@@ -23,7 +23,7 @@ public class ReservationView {
     private static final Font font = new Font(display, "ＭＳ ゴシック", 18, SWT.NORMAL);
 
     private static ReservationModel reservationModel = ReservationModel.getInstance();
-    private static ReservationController resvController = ReservationController.getInstance();
+    private static ReservationController reservationController = ReservationController.getInstance();
 
     public void init() {
         shell = new Shell(display, SWT.TITLE | SWT.RESIZE);
@@ -91,8 +91,8 @@ public class ReservationView {
             String numberRooms = numberRoomsField.getText();
 
             Reservation reservation = new Reservation(name, startDate, endDate, numberRooms);
-            resvController.add(reservation);
-            resvController.update();
+            reservationController.add(reservation);
+            reservationController.update();
             s.dispose();
         });
 
@@ -105,10 +105,9 @@ public class ReservationView {
         Button b1 = Factory.makeButton(s, "送信");
         b1.addListener(SWT.Selection, e -> {
             String name = nameText.getText();
-            if (!reservationModel.exists(name)) {
-                resvController.getMessageView().display(name + "さんの予約がありません");
-            } else {
-                ArrayList<Reservation> reservations = resvController.getReservations(name);
+            ArrayList<Reservation> reservations = reservationController.getReservations(name);
+
+            if (!reservations.isEmpty()) {
                 final Shell subshell = new Shell(display, SWT.TITLE | SWT.CLOSE);
                 subshell.setLayout(new GridLayout(2, true));
                 subshell.setText("解約");
@@ -116,17 +115,18 @@ public class ReservationView {
 
                 reservations.forEach(reservation -> {
                     StyledText reservationText = new StyledText(subshell, SWT.SINGLE);
+                    final String text = reservation.name + ", " + reservation.startDate + ", " + reservation.endDate
+                            + ", " + reservation.numberRooms;
+                    final Button removeButton = Factory.makeButton(subshell, "削除");
+
                     reservationText.setCaret(null);
                     reservationText.setFont(font);
-                    String text = reservation.name + ", " + reservation.startDate + ", " + reservation.endDate + ", "
-                            + reservation.numberRooms;
                     reservationText.setText(text);
-                    final Button removeButton = Factory.makeButton(subshell, "削除");
-                    removeButton.setData("reservation", reservation);
 
+                    removeButton.setData("reservation", reservation);
                     removeButton.addListener(SWT.Selection, removeEvent -> {
-                        reservationModel.remove((Reservation) removeButton.getData("reservation"));
-                        resvController.update();
+                        reservationController.remove((Reservation) removeButton.getData("reservation"));
+                        reservationController.update();
                         reservationText.dispose();
                         removeButton.dispose();
                     });
@@ -140,7 +140,6 @@ public class ReservationView {
                     }
                 }
             }
-
         });
 
         Button backButton = Factory.makeButton(s, "戻る");

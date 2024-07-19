@@ -60,21 +60,22 @@ public class ReservationController {
                 startDate < endDate);
     }
 
-    public void add(Reservation inputReservation) {
-        if (!isDateValid(inputReservation)) {
+    public void add(Reservation reservation) {
+        if (!isDateValid(reservation)) {
             getMessageView().display("利用開始日や利用終了日に誤りがあります");
-        } else if (!reservationModel.isVacant(inputReservation)) {
+        } else if (!reservationModel.isNumberRoomsValid(reservation)) {
+            getMessageView().display("部屋数に誤りがあります");
+        } else if (!reservationModel.isVacant(reservation)) {
             getMessageView().display("部屋が満室です");
-        } else if (reservationModel.isDuplicated(inputReservation.name, inputReservation.startDate,
-                inputReservation.endDate)) {
+        } else if (reservationModel.isDuplicated(reservation.name, reservation.startDate, reservation.endDate)) {
             getMessageView().display("予約が重複しています");
         } else {
-            reservationModel.add(inputReservation);
+            reservationModel.add(reservation);
         }
     }
 
-    public void remove(Reservation inputReservation) {
-        reservationModel.remove(inputReservation);
+    public void remove(Reservation reservation) {
+        reservationModel.remove(reservation);
     }
 
     public ArrayList<Reservation> getReservations(String name) {
@@ -86,6 +87,10 @@ public class ReservationController {
             if (reservation.name.equals(name)) {
                 userReservations.add(reservation);
             }
+        }
+
+        if (userReservations.isEmpty()) {
+            getMessageView().display(name + "さんの予約がありません");
         }
         return userReservations;
     }
