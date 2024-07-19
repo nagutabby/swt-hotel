@@ -122,8 +122,8 @@ public class ReservationView {
                 subshell.setSize(600, 600);
 
                 reservations.forEach(reservation -> {
-                    final String text = reservation.name + ", " + reservation.startDate + ", " + reservation.endDate
-                            + ", " + reservation.numberRooms;
+                    final String text = reservation.id + ": " + reservation.name + ", " + reservation.startDate + ", "
+                            + reservation.endDate + ", " + reservation.numberRooms;
                     Label reservationLabel = Factory.makeText(subshell, text);
                     final Button removeButton = Factory.makeButton(subshell, "削除");
 
@@ -135,6 +135,8 @@ public class ReservationView {
                         removeButton.dispose();
                     });
                 });
+                Button backButton = Factory.makeButton(subshell, "戻る");
+                backButton.addListener(SWT.Selection, backEvent -> subshell.dispose());
 
                 subshell.open();
 
