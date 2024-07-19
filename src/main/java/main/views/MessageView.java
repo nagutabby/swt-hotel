@@ -22,7 +22,7 @@ public class MessageView {
         MessageView.display = d;
         init();
 
-        shell.setSize(400, 300);
+        shell.setSize(500, 350);
         shell.setVisible(false);
     }
 
