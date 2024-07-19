@@ -53,7 +53,6 @@ public class Factory {
         final Text tf = new Text(shell, flags);
         GridData gd = new GridData();
         gd.horizontalAlignment = SWT.CENTER;
-        // TODO: pass the size as arguments
         gd.widthHint = 240;
         gd.heightHint = 60;
 

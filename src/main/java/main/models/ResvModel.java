@@ -76,12 +76,20 @@ public class ResvModel {
         return count + Util.toInt(inputReservation.numberRooms) <= 10;
     }
 
+    public boolean exists(String name) {
+        for (Reservation reservation : reservations) {
+            if (reservation.name.equals(name)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void add(Reservation reservation) {
         reservations.add(reservation);
     }
 
     public void remove(Reservation reservation) {
-        // TODO:空室開放
         reservations.remove(reservation);
     }
 }

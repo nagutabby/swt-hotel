@@ -21,7 +21,7 @@ public class RoomView {
     private static final int N = 31; // 日数
     private static final int D = 1; // 開始日
 
-    private static ResvModel rm = ResvModel.getInstance();
+    private static ResvModel resvModel = ResvModel.getInstance();
 
     public void init() {
         shell = new Shell(d, SWT.TITLE | SWT.RESIZE);
@@ -69,12 +69,12 @@ public class RoomView {
         }
 
         int c = 0;
-        for (Reservation r : rm.getAll()) {
-            int startDate = Util.toInt(r.startDate) - D;
-            int endDate = Util.toInt(r.endDate) - D;
+        for (Reservation reservation : resvModel.getAll()) {
+            int startDate = Util.toInt(reservation.startDate) - D;
+            int endDate = Util.toInt(reservation.endDate) - D;
             for (int i = startDate; i < endDate; i++) {
                 if (Util.inRange(i, 0, N - 1)) {
-                    buf[c][i] = r.name;
+                    buf[c][i] = reservation.name;
                 }
             }
             if (++c >= 10) {
