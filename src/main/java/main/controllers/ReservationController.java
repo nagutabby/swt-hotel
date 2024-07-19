@@ -4,29 +4,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 import main.models.Reservation;
-import main.models.ResvModel;
+import main.models.ReservationModel;
 import main.views.*;
 
-public class ResvController {
-    private static ResvController instance;
+public class ReservationController {
+    private static ReservationController instance;
 
-    private ResvController() {
+    private ReservationController() {
     }
 
-    public static ResvController getInstance() {
+    public static ReservationController getInstance() {
         if (instance == null) {
-            instance = new ResvController();
+            instance = new ReservationController();
         }
         return instance;
     }
 
-    private ResvModel resvModel = ResvModel.getInstance();
+    private ReservationModel resvModel = ReservationModel.getInstance();
 
-    private ResvView resvView;
+    private ReservationView resvView;
     private RoomView roomView;
     private MessageView messageView;
 
-    public ResvView getResvView() {
+    public ReservationView getResvView() {
         return resvView;
     }
 
@@ -38,7 +38,7 @@ public class ResvController {
         return messageView;
     }
 
-    public void setResvView(ResvView v) {
+    public void setResvView(ReservationView v) {
         resvView = v;
     }
 

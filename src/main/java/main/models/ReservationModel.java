@@ -5,15 +5,15 @@ import java.util.ArrayList;
 
 import main.controllers.Util;
 
-public class ResvModel {
-    private static ResvModel instance;
+public class ReservationModel {
+    private static ReservationModel instance;
 
-    private ResvModel() {
+    private ReservationModel() {
     }
 
-    public static ResvModel getInstance() {
+    public static ReservationModel getInstance() {
         if (instance == null)
-            instance = new ResvModel();
+            instance = new ReservationModel();
         return instance;
     }
 

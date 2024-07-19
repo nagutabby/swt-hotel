@@ -10,7 +10,7 @@ import org.eclipse.swt.widgets.*;
 
 import main.controllers.Util;
 import main.models.Reservation;
-import main.models.ResvModel;
+import main.models.ReservationModel;
 
 public class RoomView {
     private static Display d;
@@ -21,7 +21,7 @@ public class RoomView {
     private static final int N = 31; // 日数
     private static final int D = 1; // 開始日
 
-    private static ResvModel resvModel = ResvModel.getInstance();
+    private static ReservationModel resvModel = ReservationModel.getInstance();
 
     public void init() {
         shell = new Shell(d, SWT.TITLE | SWT.RESIZE);

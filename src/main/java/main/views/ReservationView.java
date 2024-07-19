@@ -10,20 +10,20 @@ import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.*;
 
-import main.controllers.ResvController;
+import main.controllers.ReservationController;
 import main.controllers.Util;
 import main.models.Reservation;
-import main.models.ResvModel;
+import main.models.ReservationModel;
 
-public class ResvView {
+public class ReservationView {
     private static Display d;
     private static Shell shell;
     private static ScrolledComposite sc;
     private static Table tbl;
     private static final Font f = new Font(d, "ＭＳ ゴシック", 18, SWT.NORMAL);
 
-    private static ResvModel resvModel = ResvModel.getInstance();
-    private static ResvController resvController = ResvController.getInstance();
+    private static ReservationModel resvModel = ReservationModel.getInstance();
+    private static ReservationController resvController = ReservationController.getInstance();
 
     public void init() {
         shell = new Shell(d, SWT.TITLE | SWT.RESIZE);
@@ -69,8 +69,8 @@ public class ResvView {
         }
     }
 
-    public ResvView(Display d) {
-        ResvView.d = d;
+    public ReservationView(Display d) {
+        ReservationView.d = d;
         init();
 
         shell.setSize(800, 600);

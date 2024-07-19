@@ -7,19 +7,19 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
-import main.controllers.ResvController;
-import main.models.ResvModel;
+import main.controllers.ReservationController;
+import main.models.ReservationModel;
 
 public class MainView {
     private static final Display d = new Display();
     private static final Font f = new Font(d, "ＭＳ ゴシック", 18, SWT.NORMAL);
     private static final Shell shell = new Shell(d, SWT.TITLE | SWT.CLOSE);
-    private static final ResvModel rm = ResvModel.getInstance();
-    private static final ResvController rc = ResvController.getInstance();
+    private static final ReservationModel rm = ReservationModel.getInstance();
+    private static final ReservationController rc = ReservationController.getInstance();
 
     private static void init() {
         rm.init();
-        rc.setResvView(new ResvView(d)); // rc.attach
+        rc.setResvView(new ReservationView(d)); // rc.attach
         rc.setRoomView(new RoomView(d)); // rc.attach
         rc.setMessageView(new MessageView(d));
         Factory.init(d);
