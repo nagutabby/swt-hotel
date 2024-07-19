@@ -116,20 +116,16 @@ public class ReservationView {
                 subshell.setSize(600, 600);
 
                 reservations.forEach(reservation -> {
-                    StyledText reservationText = new StyledText(subshell, SWT.SINGLE);
                     final String text = reservation.name + ", " + reservation.startDate + ", " + reservation.endDate
                             + ", " + reservation.numberRooms;
+                    Label reservationLabel = Factory.makeText(subshell, text);
                     final Button removeButton = Factory.makeButton(subshell, "削除");
-
-                    reservationText.setCaret(null);
-                    reservationText.setFont(font);
-                    reservationText.setText(text);
 
                     removeButton.setData("reservation", reservation);
                     removeButton.addListener(SWT.Selection, removeEvent -> {
                         reservationController.remove((Reservation) removeButton.getData("reservation"));
                         reservationController.update();
-                        reservationText.dispose();
+                        reservationLabel.dispose();
                         removeButton.dispose();
                     });
                 });

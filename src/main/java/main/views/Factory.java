@@ -32,15 +32,27 @@ public class Factory {
     public static Text makeTextField(Shell shell, String name, int flags) {
         final Label label = new Label(shell, SWT.NULL);
         final Text text = new Text(shell, flags);
-        GridData gd = new GridData();
-        gd.horizontalAlignment = SWT.CENTER;
-        gd.widthHint = 240;
-        gd.heightHint = 60;
+        GridData gridData = new GridData();
+        gridData.horizontalAlignment = SWT.CENTER;
+        gridData.widthHint = 240;
+        gridData.heightHint = 60;
 
         label.setText(name);
         label.setFont(font);
-        text.setLayoutData(gd);
+        text.setLayoutData(gridData);
         text.setFont(font);
         return text;
+    }
+
+    public static Label makeText(Shell shell, String name) {
+        final Label label = new Label(shell, SWT.NULL);
+        GridData gridData = new GridData();
+        gridData.horizontalAlignment = SWT.CENTER;
+        gridData.widthHint = 240;
+        gridData.heightHint = 60;
+
+        label.setText(name);
+        label.setFont(font);
+        return label;
     }
 }
