@@ -9,17 +9,17 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.MessageBox;
 
 public class MessageView {
-    private static Display d;
+    private static Display display;
     private static Shell shell;
-    private static final Font f = new Font(d, "ＭＳ ゴシック", 18, SWT.NORMAL);
-    private static Text tf;
+    private static final Font font = new Font(display, "ＭＳ ゴシック", 18, SWT.NORMAL);
+    private static Text text;
 
     public Text getTextField() {
-        return tf;
+        return text;
     }
 
     public MessageView(Display d) {
-        MessageView.d = d;
+        MessageView.display = d;
         init();
 
         shell.setSize(400, 300);
@@ -27,8 +27,8 @@ public class MessageView {
     }
 
     public void init() {
-        shell = new Shell(d, SWT.TITLE | SWT.RESIZE);
-        shell.setFont(f);
+        shell = new Shell(display, SWT.TITLE | SWT.RESIZE);
+        shell.setFont(font);
         shell.setLayout(new GridLayout(1, true));
     }
 

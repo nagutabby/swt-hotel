@@ -16,7 +16,7 @@ public class Util {
         return v;
     }
 
-    // 範囲検査:l,uは正, 数字以外はvは-1なので失敗
+    // 範囲検査: l, uは正、数字以外はvは-1なので失敗
     public static boolean inRange(int v, int l, int u) {
         return l <= v && v <= u;
     }

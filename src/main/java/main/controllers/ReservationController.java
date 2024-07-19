@@ -5,7 +5,9 @@ import java.util.List;
 
 import main.models.Reservation;
 import main.models.ReservationModel;
-import main.views.*;
+import main.views.ReservationView;
+import main.views.RoomView;
+import main.views.MessageView;
 
 public class ReservationController {
     private static ReservationController instance;
@@ -20,14 +22,14 @@ public class ReservationController {
         return instance;
     }
 
-    private ReservationModel resvModel = ReservationModel.getInstance();
+    private ReservationModel reservationModel = ReservationModel.getInstance();
 
-    private ReservationView resvView;
+    private ReservationView reservationView;
     private RoomView roomView;
     private MessageView messageView;
 
-    public ReservationView getResvView() {
-        return resvView;
+    public ReservationView getreservationView() {
+        return reservationView;
     }
 
     public RoomView getRoomView() {
@@ -38,8 +40,8 @@ public class ReservationController {
         return messageView;
     }
 
-    public void setResvView(ReservationView v) {
-        resvView = v;
+    public void setreservationView(ReservationView v) {
+        reservationView = v;
     }
 
     public void setRoomView(RoomView v) {
@@ -50,9 +52,9 @@ public class ReservationController {
         messageView = v;
     }
 
-    private boolean isDateValid(Reservation r) {
-        int startDate = Util.toInt(r.startDate);
-        int endDate = Util.toInt(r.endDate);
+    private boolean isDateValid(Reservation reservation) {
+        int startDate = Util.toInt(reservation.startDate);
+        int endDate = Util.toInt(reservation.endDate);
         return (Util.inRange(startDate, 1, 30) &&
                 Util.inRange(endDate, 1, 31) &&
                 startDate < endDate);
@@ -63,24 +65,25 @@ public class ReservationController {
 
         if (!isDateValid(inputReservation)) {
             getMessageView().display("利用開始日や利用終了日に誤りがあります");
-        } else if (!resvModel.isVacant(inputReservation)) {
+        } else if (!reservationModel.isVacant(inputReservation)) {
             getMessageView().display("部屋が満室です");
-        } else if (resvModel.isDuplicated(inputReservation.name, inputReservation.startDate, inputReservation.endDate)) {
+        } else if (reservationModel.isDuplicated(inputReservation.name, inputReservation.startDate,
+                inputReservation.endDate)) {
             getMessageView().display("予約が重複しています");
         } else {
             for (int i = 0; i < numberRooms; i++) {
-                resvModel.add(inputReservation);
+                reservationModel.add(inputReservation);
             }
         }
     }
 
     public void remove(Reservation inputReservation) {
-        resvModel.remove(inputReservation);
+        reservationModel.remove(inputReservation);
     }
 
     public ArrayList<Reservation> getReservations(String name) {
         List<Reservation> reservations = new ArrayList<>();
-        reservations = resvModel.getAll();
+        reservations = reservationModel.getAll();
         ArrayList<Reservation> userReservations = new ArrayList<>();
 
         for (Reservation reservation : reservations) {
@@ -92,7 +95,7 @@ public class ReservationController {
     }
 
     public void update() {
-        resvView.update();
+        reservationView.update();
         roomView.update();
     }
 }

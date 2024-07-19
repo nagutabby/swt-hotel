@@ -11,37 +11,37 @@ import main.controllers.ReservationController;
 import main.models.ReservationModel;
 
 public class MainView {
-    private static final Display d = new Display();
-    private static final Font f = new Font(d, "ＭＳ ゴシック", 18, SWT.NORMAL);
-    private static final Shell shell = new Shell(d, SWT.TITLE | SWT.CLOSE);
-    private static final ReservationModel rm = ReservationModel.getInstance();
-    private static final ReservationController rc = ReservationController.getInstance();
+    private static final Display display = new Display();
+    private static final Font font = new Font(display, "ＭＳ ゴシック", 18, SWT.NORMAL);
+    private static final Shell shell = new Shell(display, SWT.TITLE | SWT.CLOSE);
+    private static final ReservationModel reservationModel = ReservationModel.getInstance();
+    private static final ReservationController reservationController = ReservationController.getInstance();
 
     private static void init() {
-        rm.init();
-        rc.setResvView(new ReservationView(d)); // rc.attach
-        rc.setRoomView(new RoomView(d)); // rc.attach
-        rc.setMessageView(new MessageView(d));
-        Factory.init(d);
-        shell.setFont(f);
+        reservationModel.init();
+        reservationController.setreservationView(new ReservationView(display));
+        reservationController.setRoomView(new RoomView(display));
+        reservationController.setMessageView(new MessageView(display));
+        Factory.init(display);
+        shell.setFont(font);
 
         shell.setText("ホテル予約システム");
-        GridLayout l = new GridLayout(1, true);
-        shell.setLayout(l);
+        GridLayout gridLayout = new GridLayout(1, true);
+        shell.setLayout(gridLayout);
 
         Factory.makeLabel(shell, "ようこそ");
 
-        final Button b1 = Factory.makeButton(shell, "予約");
-        b1.addListener(SWT.Selection, e -> rc.getResvView().showAddDialog());
+        final Button addReservationButton = Factory.makeButton(shell, "予約");
+        addReservationButton.addListener(SWT.Selection, e -> reservationController.getreservationView().showAddDialog());
 
-        final Button b2 = Factory.makeButton(shell, "解約");
-        b2.addListener(SWT.Selection, e -> rc.getResvView().showRemoveDialog());
+        final Button cancelReservationButton = Factory.makeButton(shell, "解約");
+        cancelReservationButton.addListener(SWT.Selection, e -> reservationController.getreservationView().showRemoveDialog());
 
-        final Button b3 = Factory.makeButton(shell, "予約一覧表示");
-        b3.addListener(SWT.Selection, e -> rc.getResvView().display());
+        final Button listReservationsButton = Factory.makeButton(shell, "予約一覧表示");
+        listReservationsButton.addListener(SWT.Selection, e -> reservationController.getreservationView().display());
 
-        final Button b4 = Factory.makeButton(shell, "部屋一覧表示");
-        b4.addListener(SWT.Selection, e -> rc.getRoomView().display());
+        final Button listRoomsButton = Factory.makeButton(shell, "部屋一覧表示");
+        listRoomsButton.addListener(SWT.Selection, e -> reservationController.getRoomView().display());
     }
 
     public static void main(String[] args) {
@@ -51,10 +51,10 @@ public class MainView {
         shell.open();
 
         while (!shell.isDisposed()) {
-            if (!d.readAndDispatch()) {
-                d.sleep();
+            if (!display.readAndDispatch()) {
+                display.sleep();
             }
         }
-        d.dispose();
+        display.dispose();
     }
 }

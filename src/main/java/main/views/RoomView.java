@@ -13,41 +13,41 @@ import main.models.Reservation;
 import main.models.ReservationModel;
 
 public class RoomView {
-    private static Display d;
-    private static final Font f = new Font(d, "ＭＳ ゴシック", 18, SWT.NORMAL);
+    private static Display display;
+    private static final Font font = new Font(display, "ＭＳ ゴシック", 18, SWT.NORMAL);
     private static Shell shell;
-    private static ScrolledComposite sc;
-    private static Table tbl;
+    private static ScrolledComposite scrolledComposite;
+    private static Table table;
     private static final int N = 31; // 日数
     private static final int D = 1; // 開始日
 
-    private static ReservationModel resvModel = ReservationModel.getInstance();
+    private static ReservationModel reservationModel = ReservationModel.getInstance();
 
     public void init() {
-        shell = new Shell(d, SWT.TITLE | SWT.RESIZE);
-        shell.setFont(f);
+        shell = new Shell(display, SWT.TITLE | SWT.RESIZE);
+        shell.setFont(font);
         shell.setLayout(new GridLayout(1, true));
         shell.setText("部屋状態一覧");
-        sc = new ScrolledComposite(shell, SWT.H_SCROLL | SWT.V_SCROLL);
-        tbl = new Table(sc, SWT.LEFT); // 表示用
-        sc.setContent(tbl);
+        scrolledComposite = new ScrolledComposite(shell, SWT.H_SCROLL | SWT.V_SCROLL);
+        table = new Table(scrolledComposite, SWT.LEFT); // 表示用
+        scrolledComposite.setContent(table);
 
-        inittbl();
+        initTable();
 
         final Button b1 = Factory.makeButton(shell, "OK");
         b1.addListener(SWT.Selection, e -> shell.setVisible(false));
     }
 
-    private void inittbl() {
+    private void initTable() {
         TableColumn col;
-        tbl.setFont(f);
-        tbl.setHeaderVisible(true);
-        tbl.setSize(1320, 500);
-        col = new TableColumn(tbl, SWT.LEFT);
+        table.setFont(font);
+        table.setHeaderVisible(true);
+        table.setSize(1320, 500);
+        col = new TableColumn(table, SWT.LEFT);
         col.setText("Room");
         col.setWidth(120);
         for (int i = 0; i < N; i++) {
-            col = new TableColumn(tbl, SWT.LEFT);
+            col = new TableColumn(table, SWT.LEFT);
             col.setText(String.format("%d", D + i));
             col.setWidth(120);
         }
@@ -61,7 +61,6 @@ public class RoomView {
     private static String[][] buf = new String[10][N];
 
     private void makeBuffer() {
-        // clear
         for (int y = 0; y < 10; y++) {
             for (int x = 0; x < N; x++) {
                 buf[y][x] = "";
@@ -69,7 +68,7 @@ public class RoomView {
         }
 
         int c = 0;
-        for (Reservation reservation : resvModel.getAll()) {
+        for (Reservation reservation : reservationModel.getAll()) {
             int startDate = Util.toInt(reservation.startDate) - D;
             int endDate = Util.toInt(reservation.endDate) - D;
             for (int i = startDate; i < endDate; i++) {
@@ -95,15 +94,15 @@ public class RoomView {
 
     public void update() {
         makeBuffer();
-        tbl.removeAll();
+        table.removeAll();
         for (int y = 0; y < 10; y++) {
-            TableItem row = new TableItem(tbl, SWT.NULL);
+            TableItem row = new TableItem(table, SWT.NULL);
             row.setText(makeRow(y));
         }
     }
 
     public RoomView(Display d) {
-        RoomView.d = d;
+        RoomView.display = d;
         init();
         shell.setSize(1320, 800);
         shell.setVisible(false);

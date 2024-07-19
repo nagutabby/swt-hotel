@@ -19,7 +19,7 @@ public class ReservationModel {
 
     private List<Reservation> reservations = new ArrayList<Reservation>();
 
-    // 動作確認用初期値(要素数増加)
+    // 初期値
     public void init() {
         reservations.add(new Reservation("1", "Alice", "11", "13", "1"));
         reservations.add(new Reservation("2", "Betty", "12", "14", "1"));

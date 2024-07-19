@@ -3,63 +3,67 @@ package main.views;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.layout.GridData;
-import org.eclipse.swt.widgets.*;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Text;
 
 public class Factory {
-    private static Display d;
-    private static final Font f = new Font(d, "ＭＳ ゴシック", 18, SWT.NORMAL);
+    private static Display display;
+    private static final Font font = new Font(display, "ＭＳ ゴシック", 18, SWT.NORMAL);
 
-    public static void init(Display di) {
-        d = di;
+    public static void init(Display d) {
+        display = d;
     }
 
     public static Label makeLabel(Shell s, String name) {
-        GridData gd = new GridData();
-        gd.horizontalAlignment = SWT.CENTER;
-        gd.widthHint = 400;
-        return makeLabel(s, name, gd);
+        GridData gridData = new GridData();
+        gridData.horizontalAlignment = SWT.CENTER;
+        gridData.widthHint = 400;
+        return makeLabel(s, name, gridData);
     }
 
     public static Label makeLabel(Shell s, String name, GridData gd) {
-        Label l = new Label(s, SWT.NULL);
-        l.setLayoutData(gd);
-        l.setFont(f);
-        l.setText(name);
-        return l;
+        Label label = new Label(s, SWT.NULL);
+        label.setLayoutData(gd);
+        label.setFont(font);
+        label.setText(name);
+        return label;
     }
 
     public static Label makeLabel(Shell s, String name, int hspan) {
-        GridData gd = new GridData();
-        gd.horizontalAlignment = SWT.CENTER;
-        gd.widthHint = 400;
-        gd.horizontalSpan = hspan;
-        return makeLabel(s, name, gd);
+        GridData gridData = new GridData();
+        gridData.horizontalAlignment = SWT.CENTER;
+        gridData.widthHint = 400;
+        gridData.horizontalSpan = hspan;
+        return makeLabel(s, name, gridData);
     }
 
     public static Button makeButton(Shell s, String name) {
-        Button b = new Button(s, SWT.NULL);
-        GridData gd = new GridData();
-        gd.horizontalAlignment = SWT.CENTER;
-        gd.widthHint = 240;
-        gd.heightHint = 60;
-        b.setLayoutData(gd);
-        b.setFont(f);
-        b.setText(name);
-        return b;
+        Button button = new Button(s, SWT.NULL);
+        GridData gridData = new GridData();
+        gridData.horizontalAlignment = SWT.CENTER;
+        gridData.widthHint = 240;
+        gridData.heightHint = 60;
+        button.setLayoutData(gridData);
+        button.setFont(font);
+        button.setText(name);
+        return button;
     }
 
     public static Text makeTextField(Shell shell, String name, int flags) {
-        final Label l = new Label(shell, SWT.NULL);
-        final Text tf = new Text(shell, flags);
+        final Label label = new Label(shell, SWT.NULL);
+        final Text text = new Text(shell, flags);
         GridData gd = new GridData();
         gd.horizontalAlignment = SWT.CENTER;
         gd.widthHint = 240;
         gd.heightHint = 60;
 
-        l.setText(name);
-        l.setFont(f);
-        tf.setLayoutData(gd);
-        tf.setFont(f);
-        return tf;
+        label.setText(name);
+        label.setFont(font);
+        text.setLayoutData(gd);
+        text.setFont(font);
+        return text;
     }
 }
