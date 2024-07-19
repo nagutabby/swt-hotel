@@ -29,8 +29,6 @@ public class MainView {
         GridLayout gridLayout = new GridLayout(1, true);
         shell.setLayout(gridLayout);
 
-        Factory.makeLabel(shell, "ようこそ");
-
         final Button addReservationButton = Factory.makeButton(shell, "予約");
         addReservationButton.addListener(SWT.Selection, e -> reservationController.getreservationView().showAddDialog());
 

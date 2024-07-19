@@ -89,8 +89,10 @@ public class ReservationView {
             String startDate = startDateField.getText();
             String endDate = endDateField.getText();
             String numberRooms = numberRoomsField.getText();
-
-            Reservation reservation = new Reservation(name, startDate, endDate, numberRooms);
+            List<Reservation> reservations = reservationModel.getAll();
+            int lastId = Util.toInt(reservations.get(reservations.size() - 1).id);
+            String id = Integer.valueOf(lastId + 1).toString();
+            Reservation reservation = new Reservation(id, name, startDate, endDate, numberRooms);
             reservationController.add(reservation);
             reservationController.update();
             s.dispose();

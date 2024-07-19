@@ -17,29 +17,6 @@ public class Factory {
         display = d;
     }
 
-    public static Label makeLabel(Shell s, String name) {
-        GridData gridData = new GridData();
-        gridData.horizontalAlignment = SWT.CENTER;
-        gridData.widthHint = 400;
-        return makeLabel(s, name, gridData);
-    }
-
-    public static Label makeLabel(Shell s, String name, GridData gd) {
-        Label label = new Label(s, SWT.NULL);
-        label.setLayoutData(gd);
-        label.setFont(font);
-        label.setText(name);
-        return label;
-    }
-
-    public static Label makeLabel(Shell s, String name, int hspan) {
-        GridData gridData = new GridData();
-        gridData.horizontalAlignment = SWT.CENTER;
-        gridData.widthHint = 400;
-        gridData.horizontalSpan = hspan;
-        return makeLabel(s, name, gridData);
-    }
-
     public static Button makeButton(Shell s, String name) {
         Button button = new Button(s, SWT.NULL);
         GridData gridData = new GridData();
